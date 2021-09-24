@@ -12,11 +12,31 @@
         <h1>
           <%= title %>
         </h1>
-        <p>This is the placeholder for Team Activity 02</p>
       </div>
     </div>
     <div class="container">
+        <ul>
+          <!-- loop over array -->
+          <% users.forEach(user => { %>
+            <li><%= user %></li>
+          <%  })%>
+        </ul>
+        <% if (errorMsg) { %>
+          <p><%= errorMsg %></p>
+        <% } %>
+        <form action="/ta02/addUser" method="POST">
+          <input type="text" name="userName" id="userName" />
+          <button type="submit">Add User</button>
+        </form>
 
+        <form action="/ta02/removeUser" method="POST">
+          <select name="userName2" id="userName2">
+            <% users.forEach(user => { %>
+              <option value="<%= user %>"><%= user %></option>
+            <%  })%>
+          </select>
+          <button type="submit">Remove User</button>
+        </form>
     </div>
 
 
