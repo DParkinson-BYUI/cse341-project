@@ -23,7 +23,7 @@ const flash = require('connect-flash');
 const cors = require('cors'); // Place this with other requires (like 'path' and 'express')
 
 const corsOptions = {
-  origin: "https://cse341-gh-site.herokuapp.com/",
+  origin: "https://dparki2-cse341project.herokuapp.com/",
   optionsSuccessStatus: 200
 };
 
@@ -37,15 +37,6 @@ const options = {
 
 const app = express();
 const csrfProtection = csrf();
-
-// Route setup. You can implement more in the future!
-// const ta01Routes = require('./routes/ta01');
-// const ta02Routes = require('./routes/ta02');
-// const ta03Routes = require('./routes/ta03');
-// const ta04Routes = require('./routes/ta04');
-// const ta05Routes = require('./routes/ta05');
-// Implement routes for Prove assignments
-//const prove02Routes = require('./routes/prove02'); 
 
 app
   .use(express.static(path.join(__dirname, 'public')))
@@ -67,29 +58,7 @@ app
        res.locals.userName = req.session.user.firstName;
     }
     next();
- })  
-  // For view engine as Pug
-  //.set('view engine', 'pug') // For view engine as PUG.
-  // For view engine as hbs (Handlebars)
-  //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
-  //.set('view engine', 'hbs')
+ })
 
   .use('/', routes)
-  // .use('/ta01', ta01Routes)
-  // .use('/ta02', ta02Routes)
-  // .use('/ta03', ta03Routes)
-  // .use('/ta04', ta04Routes)
-  // .use('/ta05', ta05Routes)
-  // .use('/prove02', prove02Routes)
-  // .get('/', (req, res, next) => {
-  //   // This is the primary index, always handled last.
-  //   res.render('pages/index', {
-  //     title: 'Welcome to my CSE341 repo',
-  //     path: '/',
-  //   });
-  // })
-  // .use((req, res, next) => {
-  //   // 404 page
-  //   res.render('pages/404', { title: '404 - Page Not Found', path: req.url });
-  // })
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
