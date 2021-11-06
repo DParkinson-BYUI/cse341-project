@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../../includes/header.ejs %>
+  <link rel="stylesheet" href="/stylesheets/prove/pr08/main.css">
+</head>
+
+<body>
+  <% include ../../../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+    <p>This page lets you paginate through the items.  It works with the filter feature. </p>
+  </div>
+</div>
+<div class="container">
+  <div class="flexout">
+    <form action="/prove/pr08/" method="POST">
+      <label for="keyword">Search</label>
+      <input type="text" id="keyword" name="keyword" <% if(keyword != undefined) { %> value="<%=keyword%>" <% } %> >
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">Filter</button>
+    </form>
+
+    <% include paginate.ejs %>
+  </div>
+  <ul class="pr08-list">
+    <% if(data.length > 0) { %>
+    
+      <% for(let d of data) { %> 
+        <li>
+          <h2><%= d.name %></h2>
+          <img src="<%= d.imageUrl %>" alt="<%= d.name %>">
+          <p class="price">$<%= d.price %></p>
+          <p>Description: <%= d.description %></p>
+          <span>Tags: <%= d.tags.join(', ') %></span>
+        </li>  
+      <% }%>      
+    <% } else { %>
+      <p>No matches found.</p>
+    <% }%>
+  </ul>
+  <div class="center">
+    <% include paginate.ejs %>
+  </div>
+</div>
+
+
+</body>
+</html>
